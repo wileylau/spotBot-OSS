@@ -2,11 +2,44 @@
 
 # ffmpeg comp tool
 
-mv "$1" in.flac
-ffmpeg -i in.flac -compression_level 12 "$1"
-rm -rf in.flac
+upload() {
+        touch link.txt
+        ./transfer wet "$1" | grep Download > link.txt
+}
 
-touch link.txt
-./transfer wet "$1" | grep Download > link.txt
-sed -i "s/Link/$1 at/g" link.txt
+ZIPNAME=$(date +%s)
+
+if [[ $2 == "-f" ]]; then
+        spotdl "$1" --output-format flac
+elif [[ $2 == "-n" ]]; then #mp3
+        spotdl "$1"
+fi
+
+if [[ $2 == "-f" && $3 == "-t" ]]; then
+        MUSIC=$(ls | grep .flac)
+elif [[ $2 == "-m" && $3 == "-t" ]]; then
+        MUSIC=$(ls | grep .mp3)
+fi
+
+if [[ $3 == "-a" || $3 == "-p" ]];then
+        if [[ $2 == "-f" ]]; then
+                zip -r $ZIPNAME.zip *.flac
+                MUSIC=$ZIPNAME.zip
+        elif [[ $2 == "-n" ]]; then
+                zip -r $ZIPNAME.zip *.mp3
+                MUSIC=$ZIPNAME.zip
+        fi
+fi
+
+echo $MUSIC
+
+if [[ $3 != "" ]]; then
+        upload "$MUSIC" "Playlist / Album"
+else
+        upload "$MUSIC" $MUSIC
+fi
+
+sed -i "s/Link/$MUSIC at/g" link.txt
+
 rm -rf *.flac
+rm -rf *.zip

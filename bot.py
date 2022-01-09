@@ -12,7 +12,7 @@ async def send_welcome(message):
 This bot can download songs / albums / playlists from Spotify as FLAC and MP3.
 Send a spotify song link to see the magic.
 Use /flac for FLACs and use /mp3 for MP3s.
-For example: /flac https://open.spotify.com/album/5LFzwirfFwBKXJQGfwmiMY
+For example: /flac https://open.spotify.com/track/2iUXsYOEPhVqEBwsqP70rE?si=833f974040c341d0
 
 This bot uses spotDL (https://github.com/spotDL). Hats off to their work.
 This bot uses pyTelegramBotAPI (https://github.com/eternnoir/pyTelegramBotAPI).

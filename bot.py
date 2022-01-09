@@ -6,6 +6,8 @@ from telebot.async_telebot import AsyncTeleBot
 
 bot = AsyncTeleBot("your token goes here", parse_mode=None)
 
+print("spotBot is up and running.")
+
 @bot.message_handler(commands=['help'])
 async def send_welcome(message):
     await bot.reply_to(message, """\

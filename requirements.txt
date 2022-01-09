@@ -1,3 +1,4 @@
 pyTelegramBotAPI
 spotdl
 asyncio
+aiohttp

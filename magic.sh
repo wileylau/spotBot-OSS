@@ -9,6 +9,11 @@ upload() {
 
 ZIPNAME=$(date +%s)
 
+if [[ $2 == "" ]]; then
+        echo "Please send a link / Query!" > link.txt
+        exit
+fi
+
 if [[ $2 == "-f" ]]; then
         spotdl "$1" --output-format flac
 elif [[ $2 == "-m" ]]; then #mp3

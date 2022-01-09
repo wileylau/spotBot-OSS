@@ -1,12 +1,14 @@
 import os
 import telebot
 import fnmatch
+import asyncio
+from telebot.async_telebot import AsyncTeleBot
 
-bot = telebot.TeleBot("your token goes here", parse_mode=None)
+bot = AsyncTeleBot("your token goes here", parse_mode=None)
 
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, """\
+@bot.message_handler(commands=['help'])
+async def send_welcome(message):
+    await bot.reply_to(message, """\
 This bot can download songs / albums / playlists from Spotify as FLAC and MP3.
 Send a spotify song link to see the magic.
 Use /flac for FLACs and use /mp3 for MP3s.
@@ -18,8 +20,12 @@ Bot source code is available at https://github.com/rain2wood/spotBot-OSS.
 \
 """)
 
+@bot.message_handler(commands=['up'])
+async def up_check(message):
+    await bot.reply_to(message, "Bot is up and running.")
+
 @bot.message_handler(commands=['flac'])
-def download_flac(message):
+async def download_flac(message):
     chat_id = message.chat.id
     songLink = message.text
     str = songLink
@@ -33,7 +39,7 @@ def download_flac(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
     elif str.find("album")!=-1 or str.find("playlist")!=-1:
         print("is album or playlist")
         realSong = songLink.replace("/flac", "")
@@ -44,7 +50,7 @@ def download_flac(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
     else:
         print("is maybe query")
         realSong = songLink.replace("/flac", "")
@@ -56,10 +62,10 @@ def download_flac(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
 
 @bot.message_handler(commands=['mp3'])
-def download_mp3(message):
+async def download_mp3(message):
     chat_id = message.chat.id
     songLink = message.text
     str = songLink
@@ -73,7 +79,7 @@ def download_mp3(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
     elif str.find("album")!=-1 or str.find("playlist")!=-1:
         print("is album or playlist")
         realSong = songLink.replace("/mp3", "")
@@ -84,7 +90,7 @@ def download_mp3(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
     else:
         print("is maybe query")
         realSong = songLink.replace("/mp3", "")
@@ -96,7 +102,6 @@ def download_mp3(message):
         text = f.read()
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
-        os.system(cleansong)
+        await os.system(cleansong)
 
-bot.infinity_polling()
-
+asyncio.run(bot.infinity_polling())

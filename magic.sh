@@ -9,7 +9,7 @@ upload() {
 
 ZIPNAME=$(date +%s)
 
-if [[ $2 == "" ]]; then
+if [[ $3 == "" ]]; then
         echo "Please send a link / Query!" > link.txt
         exit
 fi

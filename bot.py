@@ -22,6 +22,18 @@ Bot source code is available at https://github.com/rain2wood/spotBot-OSS.
 \
 """)
 
+@bot.message_handler(commands=['faq'])
+async def faq(message):
+    await bot.reply_to(message""" \
+    Q: My song isn't right! What Can I do?
+    A: Try to use another Spotify link.
+
+    Q: My lyrics aren't right! What can I do?
+    A: I don't know either. Just don't read lyrics.
+
+    Note that the tool fetches results from YouTube Music and it isn't 100% accurate.
+    \
+    """)
 @bot.message_handler(commands=['up'])
 async def up_check(message):
     await bot.reply_to(message, "Bot is up and running.")

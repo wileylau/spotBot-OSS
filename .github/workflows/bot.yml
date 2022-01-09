@@ -1,0 +1,22 @@
+name: Spotify Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "* */6 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+       
+       - name: Setup Env
+         run: |
+              sudo bash setup.sh
+
+       - name: Run Bot
+         run: |
+              python bot.py

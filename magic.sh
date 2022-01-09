@@ -11,7 +11,7 @@ ZIPNAME=$(date +%s)
 
 if [[ $2 == "-f" ]]; then
         spotdl "$1" --output-format flac
-elif [[ $2 == "-n" ]]; then #mp3
+elif [[ $2 == "-m" ]]; then #mp3
         spotdl "$1"
 fi
 

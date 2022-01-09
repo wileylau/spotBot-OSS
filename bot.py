@@ -9,9 +9,10 @@ bot = AsyncTeleBot("your token goes here", parse_mode=None)
 @bot.message_handler(commands=['help'])
 async def send_welcome(message):
     await bot.reply_to(message, """\
-This bot can download songs / albums / playlists from Spotify as FLAC and MP3.
+This bot can download songs / albums / playlists from Spotify & Soundcloud as FLAC (spotify only) and MP3.
 Send a spotify song link to see the magic.
 Use /flac for FLACs and use /mp3 for MP3s.
+Use /sc to download songs from SoundCloud. Only LINKS are supported!
 
 For example: /flac https://open.spotify.com/track/2iUXsYOEPhVqEBwsqP70rE?si=833f974040c341d0
 OR: /flac rewrite the stars anne marie
@@ -117,5 +118,20 @@ async def download_mp3(message):
         await bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
         os.system(cleansong)
+
+@bot.message_handler(commands=['sc'])
+async def download_soundcloud(message):
+    chat_id = message.chat.id
+    songLink = message.text
+    realSong = songLink.replace("/sc", "")
+    print("attempt to download track from soundcloud")
+    await bot.reply_to(message, "Fetching song from link...")
+    DownloadSong = "bash magic.sh {} -sc -x".format(realSong)
+    os.system(DownloadSong)
+    f = open("link.txt", "r")
+    text = f.read()
+    await bot.send_message(chat_id, text)
+    cleansong = "rm -rf link.txt"
+    os.system(cleansong)
 
 asyncio.run(bot.infinity_polling())

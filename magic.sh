@@ -18,6 +18,9 @@ if [[ $2 == "-f" ]]; then
         spotdl "$1" --output-format flac
 elif [[ $2 == "-m" ]]; then #mp3
         spotdl "$1"
+elif [[ $2 == "-sc" ]]; then # soundcloud
+        scdl -l "$1"
+        MUSIC=$(ls | grep .mp3)
 fi
 
 if [[ $2 == "-f" && $3 == "-t" ]]; then

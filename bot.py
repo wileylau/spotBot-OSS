@@ -6,7 +6,17 @@ bot = telebot.TeleBot("your token goes here", parse_mode=None)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    bot.reply_to(message, "Howdy, how are you doing?")
+    bot.reply_to(message, """\
+This bot can download songs / albums / playlists from Spotify as FLAC and MP3.
+Send a spotify song link to see the magic.
+Use /flac for FLACs and use /mp3 for MP3s.
+For example: /flac https://open.spotify.com/album/5LFzwirfFwBKXJQGfwmiMY
+
+This bot uses spotDL (https://github.com/spotDL). Hats off to their work.
+This bot uses pyTelegramBotAPI (https://github.com/eternnoir/pyTelegramBotAPI).
+Bot source code is available at https://github.com/rain2wood/spotBot-OSS.
+\
+""")
 
 @bot.message_handler(commands=['flac'])
 def download_flac(message):

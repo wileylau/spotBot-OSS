@@ -46,7 +46,17 @@ def download_flac(message):
         cleansong = "rm -rf link.txt"
         os.system(cleansong)
     else:
-        bot.send_message(chat_id, "bot does not support non-track")
+        print("is maybe query")
+        realSong = songLink.replace("/flac", "")
+        tryQuery = "Trying to search for '{}' on Spotify...".format(realSong)
+        bot.reply_to(message, tryQuery)
+        DownloadSong = "bash magic.sh '{}' -f -t".format(realSong)
+        os.system(DownloadSong)
+        f = open("link.txt", "r")
+        text = f.read()
+        bot.send_message(chat_id, text)
+        cleansong = "rm -rf link.txt"
+        os.system(cleansong)
 
 @bot.message_handler(commands=['mp3'])
 def download_mp3(message):
@@ -76,7 +86,17 @@ def download_mp3(message):
         cleansong = "rm -rf link.txt"
         os.system(cleansong)
     else:
-        bot.send_message(chat_id, "bot does not support non-track")
+        print("is maybe query")
+        realSong = songLink.replace("/mp3", "")
+        tryQuery = "Trying to search for '{}' on Spotify...".format(realSong)
+        bot.reply_to(message, tryQuery)
+        DownloadSong = "bash magic.sh '{}' -m -t".format(realSong)
+        os.system(DownloadSong)
+        f = open("link.txt", "r")
+        text = f.read()
+        bot.send_message(chat_id, text)
+        cleansong = "rm -rf link.txt"
+        os.system(cleansong)
 
 bot.infinity_polling()
 

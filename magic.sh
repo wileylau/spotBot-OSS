@@ -41,6 +41,10 @@ fi
 
 sed -i "s/Link/$MUSIC at/g" link.txt
 
+if [[ ! -n $(ls | grep .zip) &&  ! -n $(ls | grep .flac) &&  ! -n $(ls | grep .mp3) ]]; then
+        echo "Something went wrong. Check your entries and try again." > link.txt
+fi
+
 rm -rf *.flac
 rm -rf *.mp3
 rm -rf *.zip

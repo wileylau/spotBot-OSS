@@ -20,6 +20,7 @@ For example: /flac https://open.spotify.com/track/2iUXsYOEPhVqEBwsqP70rE?si=833f
 OR: /flac rewrite the stars anne marie
 
 This bot uses spotDL (https://github.com/spotDL). Hats off to their work.
+This bot uses scdl (https://github.com/flyingrub/scdl). Hats off to their work.
 This bot uses pyTelegramBotAPI (https://github.com/eternnoir/pyTelegramBotAPI).
 Bot source code is available at https://github.com/rain2wood/spotBot-OSS.
 \

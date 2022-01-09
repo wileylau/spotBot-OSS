@@ -24,6 +24,17 @@ def download_flac(message):
         bot.send_message(chat_id, text)
         cleansong = "rm -rf link.txt"
         os.system(cleansong)
+    elif str.find("album")!=-1 or str.find("playlist")!=-1:
+        print("is album or playlist")
+        realSong = songLink.replace("/flac", "")
+        bot.reply_to(message, "Fetching album / playlist. This will take a while.")
+        DownloadSong = "bash magic.sh '{}' -f -a".format(realSong)
+        os.system(DownloadSong)
+        f = open("link.txt", "r")
+        text = f.read()
+        bot.send_message(chat_id, text)
+        cleansong = "rm -rf link.txt"
+        os.system(cleansong)
     else:
         bot.send_message(chat_id, "bot does not support non-track")
 
@@ -37,6 +48,17 @@ def download_mp3(message):
         realSong = songLink.replace("/mp3", "")
         bot.reply_to(message, "Fetching song...")
         DownloadSong = "bash magic.sh '{}' -m -t".format(realSong)
+        os.system(DownloadSong)
+        f = open("link.txt", "r")
+        text = f.read()
+        bot.send_message(chat_id, text)
+        cleansong = "rm -rf link.txt"
+        os.system(cleansong)
+    elif str.find("album")!=-1 or str.find("playlist")!=-1:
+        print("is album or playlist")
+        realSong = songLink.replace("/mp3", "")
+        bot.reply_to(message, "Fetching album / playlist. This will take a while.")
+        DownloadSong = "bash magic.sh '{}' -m -a".format(realSong)
         os.system(DownloadSong)
         f = open("link.txt", "r")
         text = f.read()

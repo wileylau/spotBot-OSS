@@ -25,7 +25,7 @@ if [[ $3 == "-a" || $3 == "-p" ]];then
         if [[ $2 == "-f" ]]; then
                 zip -r $ZIPNAME.zip *.flac
                 MUSIC=$ZIPNAME.zip
-        elif [[ $2 == "-n" ]]; then
+        elif [[ $2 == "-m" ]]; then
                 zip -r $ZIPNAME.zip *.mp3
                 MUSIC=$ZIPNAME.zip
         fi
@@ -42,4 +42,5 @@ fi
 sed -i "s/Link/$MUSIC at/g" link.txt
 
 rm -rf *.flac
+rm -rf *.mp3
 rm -rf *.zip

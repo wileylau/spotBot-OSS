@@ -1,5 +1,6 @@
 # spotBot #
 ## Telegram Bot that Download songs from Spotify using spotDL Binary ##
+## DISCLAIMER: Educational purposes only. I do not promote piracy. ##
 
 ### Bot in action ###
 ![demo](.github/assets/demo.png)

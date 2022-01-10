@@ -4,7 +4,9 @@ import fnmatch
 import asyncio
 from telebot.async_telebot import AsyncTeleBot
 
-bot = AsyncTeleBot("your token goes here", parse_mode=None)
+botToken = os.environ['token']
+
+bot = AsyncTeleBot(botToken, parse_mode=None)
 
 print("spotBot is up and running.")
 
